@@ -13,3 +13,4 @@ const addProducts = () => {
 const getProductsAsync = () => {
     console.log("iife")
 }
+
