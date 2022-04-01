@@ -1,22 +1,22 @@
 {
-  "name": "esgiquentin",
+  "name": "esgi-api",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon index.mjs --ignore 'products.json'",
-    "start": "node index.mjs",
-    "postinstall":"npm install --prefix server"
+    "dev": "nodemon index.mjs --ignore products.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Quentin",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "body-parser": "^1.19.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15",
+    "swagger-ui-express": "^4.3.0"
   },
   "dependencies": {
-    "body-parser": "^1.19.1",
-    "express": "^4.17.2",
-    "morgan": "^1.10.0"
-  },
-  "description": ""
+    "express": "^4.17.3"
+  }
 }

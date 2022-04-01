@@ -1,35 +1,22 @@
 ###
-# LISTE TOUS LES PRODUITS
-GET http://localhost:3000/products HTTP/1.1
-
+GET http://localhost:3011/products
 
 ###
-# RECUPERE LE PRODUIT AVEC UN NOM
-GET http://localhost:3000/products/pomme HTTP/1.1
-
+GET http://localhost:3011/
 
 ###
-# AJOUTE UN PRODUIT
-POST http://localhost:3000/products HTTP/1.1
+GET http://localhost:3011/products/pomme
+
+###
+POST http://localhost:3011/products HTTP/1.1
 content-type: application/json
 
 {
-    "name":"cerises", 
-    "quantity": 10
+    "name": "orange",
+    "quantity": 35
 }
 
 ###
-# SUPPRIME UN PRODUIT PAR SON NOM (banane = false)
-DELETE http://localhost:3000/products/banane HTTP/1.1
+DELETE http://localhost:3000/products/pomme?quantity=500 HTTP/1.1
 
-###
-# SUPPRIME UN PRODUIT PAR SON NOM (pomme = true)
-DELETE http://localhost:3000/products/pomme HTTP/1.1
 
-###
-# SUPPRIME UNE QUANTITE D'UN PRODUIT PAR SON NOM (pas assez de stock)
-DELETE http://localhost:3000/products/cerises?quantity=30 HTTP/1.1
-
-###
-# SUPPRIME UNE QUANTITE D'UN PRODUIT PAR SON NOM
-DELETE http://localhost:3000/products/cerises?quantity=3 HTTP/1.1

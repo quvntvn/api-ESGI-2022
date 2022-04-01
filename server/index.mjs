@@ -1,22 +1,23 @@
+import router from "./routes.mjs"
+import express from "express"
 import bodyparser from "body-parser";
-import morgan from "morgan";
-import express from "express";
-import router from "./routes.mjs";
+import morgan from "morgan"
 import swaggerUI from "swagger-ui-express"
-import docs from "./docs/index.mjs"
+import docs from "../docs/index.mjs"
 
-
-
-const app = express();
 const port = 3011;
+const app = express()
+
+app.use(bodyparser.urlencoded({ extended: false }))
+app.use(bodyparser.json())
+app.use(morgan('tiny'))
+app.use(router)
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(docs))
 
 
-app.use(bodyparser.urlencoded({ extended: false }));
-app.use(bodyparser.json());
-app.use(morgan("morgan"));
-app.use(router);
 app.listen(port, () => {
-  console.log(`server listen at ${port}`);
-});
+  console.log(`server listen at ${port}`)
+})
 
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(docs));
+
+
