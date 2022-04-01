@@ -1,19 +1,18 @@
-import express from "express";
+import bodyparser from "body-parser";
 import morgan from "morgan";
-import bodyParser from "body-parser";
-
+import express from "express";
 import router from "./routes.mjs";
 
-// APP
+
+
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 3011;
 
-// MIDDLEWARES
-app.use(morgan("tiny"));
-app.use(bodyParser.json());
+
+app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.json());
+app.use(morgan("morgan"));
 app.use(router);
-
-// MAIN SERVER
 app.listen(port, () => {
-  console.log("\x1b[36m%s\x1b[0m", `\nListening at http://localhost:${port}`);
+  console.log(`server listen at ${port}`);
 });

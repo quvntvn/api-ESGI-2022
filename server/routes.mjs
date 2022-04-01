@@ -1,33 +1,40 @@
 import express from "express";
-const router = express.Router();
-
 import { add, getAll, getByName, remove } from "./products.mjs";
 
-// add
+const router = express.Router();
+
+router.get("/", (req, res) => {
+  res.send("/products/name => un produit spé & /products => tout les produits");
+});
+
+router.get("/products", (req, res) => {
+  res.send(getAll());
+});
+
+router.get("/products/:name", (req, res) => {
+  const name = req.params.name;
+  res.send(getByName(req.params.name));
+});
+
 router.post("/products", (req, res) => {
   const { name, quantity } = req.body;
   res.send(add(name, quantity));
 });
 
-// getAll
-router.get("/products", (_, res) => {
-  res.send(JSON.stringify(getAll()));
-});
-
-// getByName
-router.get("/products/:name", (req, res) => {
-  const name = req.params.name;
-
-  const pdt = getByName(name);
-  res.send(pdt ? JSON.stringify(pdt) : `Produit "${name}" introuvable`);
-});
-
-// delete
 router.delete("/products/:name", (req, res) => {
-  const produit = req.params.name;
-  const quantity = req.query.quantity;
-
-  res.send(remove(produit, quantity));
+  let quantity = 0;
+  const name = req.params.name;
+  if (req.query.quantity) {
+    quantity = req.query.quantity;
+    const check = remove(name, quantity);
+    if (check) {
+      res.send("delete success");
+    } else {
+      res.send("check name or quantity");
+    }
+  } else {
+    res.send("cant delete without quantity");
+  }
 });
 
 export default router;
