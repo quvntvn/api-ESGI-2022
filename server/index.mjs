@@ -2,6 +2,8 @@ import bodyparser from "body-parser";
 import morgan from "morgan";
 import express from "express";
 import router from "./routes.mjs";
+import swaggerUI from "swagger-ui-express"
+import docs from "./docs/index.mjs"
 
 
 
@@ -16,3 +18,5 @@ app.use(router);
 app.listen(port, () => {
   console.log(`server listen at ${port}`);
 });
+
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(docs));
